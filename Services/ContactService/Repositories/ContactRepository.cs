@@ -38,6 +38,11 @@ namespace ContactService.Repositories
         {
             return await _context.Contacts.ToListAsync();
         }
+
+        public async Task<Contact> GetContactByIdAsync(Guid id)
+        {
+            return await _context.Contacts.FindAsync(id);
+        }
     }
     
 }

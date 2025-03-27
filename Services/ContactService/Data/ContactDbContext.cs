@@ -17,8 +17,8 @@ namespace ContactService.Data
             modelBuilder.Entity<Contact>()
                 .HasMany(c => c.ContactDetails)
                 .WithOne(cd => cd.Contact)
-                .HasForeignKey(cd => cd.ContactId);
-        }
+                .HasForeignKey(cd => cd.ContactId)
+                .OnDelete(DeleteBehavior.Cascade);}
     }
     
 }

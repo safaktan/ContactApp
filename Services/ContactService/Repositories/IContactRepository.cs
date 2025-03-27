@@ -10,8 +10,7 @@ namespace ContactService.Repositories
         Task<Contact> CreateContactAsync(Contact contact);
         Task<string> DeleteContactAsync(Guid id);
         Task<IEnumerable<Contact>> GetContactListAsync();
-        //Task<Contact> GetContactAsync(Guid id);
-        //Task<Contact> UpdateContactAsync(Contact contact);
+        Task<Contact> GetContactByIdAsync(Guid id);
     }
     
 }

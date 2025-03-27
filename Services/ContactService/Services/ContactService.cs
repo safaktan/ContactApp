@@ -66,5 +66,23 @@ namespace ContactService.Services
                 return ServiceResponse<IEnumerable<CreateContactResponseDto>>.Failure(ex.Message);
             }
         }
+
+        public async Task<ServiceResponse<CreateContactResponseDto>> GetContactByIdAsync(Guid id)
+        {
+            try
+            {
+                var contact = await _contactRepository.GetContactByIdAsync(id);
+                if (contact == null)
+                {
+                    return ServiceResponse<CreateContactResponseDto>.Failure("Contact not found");
+                }
+                var contactDto = _mapper.Map<CreateContactResponseDto>(contact);
+                return ServiceResponse<CreateContactResponseDto>.Success(contactDto);
+            }
+            catch (System.Exception ex)
+            {
+                return ServiceResponse<CreateContactResponseDto>.Failure(ex.Message);
+            }
+        }
     }
 }

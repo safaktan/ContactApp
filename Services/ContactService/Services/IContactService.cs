@@ -8,7 +8,7 @@ namespace ContactService.Services
         Task<ServiceResponse<CreateContactResponseDto>> CreateContactAsync(CreateContactDto createContactDto);
         Task<ServiceResponse<string>> DeleteContactAsync(Guid id);
         Task<ServiceResponse<IEnumerable<CreateContactResponseDto>>> GetContactListAsync();
-        //Task<CreateContactResponseDto> GetContactAsync(Guid id);
+        Task<ServiceResponse<CreateContactResponseDto>> GetContactByIdAsync(Guid id);
         //Task<CreateContactResponseDto> UpdateContactAsync(Guid id, CreateContactDto createContactDto);
     }
     
