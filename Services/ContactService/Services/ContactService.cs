@@ -8,13 +8,11 @@ namespace ContactService.Services
 {
     public class ContactService : IContactService
     {
-        private readonly ContactDbContext _context;
         private readonly IMapper _mapper;
         private readonly IContactRepository _contactRepository;
 
-        public ContactService(ContactDbContext context, IMapper mapper, IContactRepository contactRepository)
+        public ContactService(IMapper mapper, IContactRepository contactRepository)
         {
-            _context = context;
             _mapper = mapper;
             _contactRepository = contactRepository;
         }

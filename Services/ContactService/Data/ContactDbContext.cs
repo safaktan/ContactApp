@@ -18,7 +18,8 @@ namespace ContactService.Data
                 .HasMany(c => c.ContactDetails)
                 .WithOne(cd => cd.Contact)
                 .HasForeignKey(cd => cd.ContactId)
-                .OnDelete(DeleteBehavior.Cascade);}
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
-    
+
 }

@@ -11,12 +11,10 @@ namespace ContactService.Controllers
     {
         private readonly IContactService _contactService;
         private readonly IContactDetailService _contactDetailService;
-        private readonly IMapper _mapper;
 
-        public ContactController(IContactService contactService, IMapper mapper, IContactDetailService contactDetailService)
+        public ContactController(IContactService contactService, IContactDetailService contactDetailService)
         {
             _contactService = contactService;
-            _mapper = mapper;
             _contactDetailService = contactDetailService;
         }
 
@@ -34,7 +32,7 @@ namespace ContactService.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteContactAsync([FromBody]Guid id)
+        public async Task<IActionResult> DeleteContactAsync(Guid id)
         {
             var response = await _contactService.DeleteContactAsync(id);
 
@@ -70,8 +68,8 @@ namespace ContactService.Controllers
 
             return Ok(response);
         }
-        [HttpGet("{contactId}")]
-        public async Task<IActionResult> GetContactInfoAndDetailByContactIdAsync([FromBody]Guid contactId)
+        [HttpGet("GetContactInfoAndDetailByContactId/{contactId}")]
+        public async Task<IActionResult> GetContactInfoAndDetailByContactIdAsync(Guid contactId)
         {
             var response = await _contactDetailService.GetContactInfoAndDetailByContactIdAsync(contactId);
 
@@ -83,8 +81,8 @@ namespace ContactService.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{contactId}")]
-        public async Task<IActionResult> DeleteAllContactDetailByContactIdAsync([FromBody]Guid contactId)
+        [HttpDelete("DeleteAllContactDetailByContactId/{contactId}")]
+        public async Task<IActionResult> DeleteAllContactDetailByContactIdAsync(Guid contactId)
         {
             var response = await _contactDetailService.DeleteAllContactDetailByContactIdAsync(contactId);
 

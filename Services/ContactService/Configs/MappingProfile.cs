@@ -20,7 +20,18 @@ namespace ContactService.Configs
                 Location = cd.Location
             }).ToList());
 
-            CreateMap<List<ContactDetail>, CreateContactDetailResponseDto>()
+            // CreateMap<List<ContactDetail>, CreateContactDetailResponseDto>()
+            // .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.First().Id))
+            // .ForMember(dest => dest.ContactId, opt => opt.MapFrom(src => src.First().ContactId))
+            // .ForMember(dest => dest.ContactDetails, opt => opt.MapFrom(src =>
+            // src.Select(cd => new ContactDetailDto
+            // {
+            //     PhoneNumber = cd.PhoneNumber,
+            //     EmailAddress = cd.EmailAddress,
+            //     Location = cd.Location
+            // }).ToList()));
+
+            CreateMap<IEnumerable<ContactDetail>, CreateContactDetailResponseDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.First().Id))
             .ForMember(dest => dest.ContactId, opt => opt.MapFrom(src => src.First().ContactId))
             .ForMember(dest => dest.ContactDetails, opt => opt.MapFrom(src =>
@@ -30,6 +41,7 @@ namespace ContactService.Configs
                 EmailAddress = cd.EmailAddress,
                 Location = cd.Location
             }).ToList()));
+
 
             CreateMap<Contact, ContactInfoAndDetailResponseDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
