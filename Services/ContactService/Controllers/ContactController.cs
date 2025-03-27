@@ -21,16 +21,38 @@ namespace ContactService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateContactAsync(CreateContactDto createContactDto)
         {
-            try
+            var response = await _contactService.CreateContactAsync(createContactDto);
+
+            if (!response.IsSuccess)
             {
-                var response = await _contactService.CreateContactAsync(createContactDto);
-                return Ok(response);
+                return BadRequest(response);
             }
-            catch (Exception ex)
+
+            return Ok(response);
+        }
+
+        public async Task<IActionResult> DeleteContactAsync(Guid id)
+        {
+            var response = await _contactService.DeleteContactAsync(id);
+
+            if (!response.IsSuccess)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(response);
             }
+
+            return Ok(response);
+        }
+        public async Task<IActionResult> GetContactListAsync()
+        {
+            var response = await _contactService.GetContactListAsync();
+
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
     }
-    
+
 }
