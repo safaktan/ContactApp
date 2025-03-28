@@ -10,7 +10,7 @@ namespace ReportService.Models
         public DateTime RequestedDate { get; set; }
         public string Status { get; set; } = ReportStatus.ReportPreparing;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public ReportDetail ReportDetail { get; set; }
+        public List<ReportDetail> ReportDetails { get; set; } = new List<ReportDetail>();
     }
     
 }

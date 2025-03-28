@@ -15,9 +15,9 @@ namespace ReportService.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Report>()
-                .HasOne(r => r.ReportDetail)
+                .HasMany(r => r.ReportDetails)
                 .WithOne(rd => rd.Report)
-                .HasForeignKey<ReportDetail>(rd => rd.ReportId)
+                .HasForeignKey(cd => cd.ReportId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
 

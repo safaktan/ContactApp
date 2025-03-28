@@ -12,8 +12,6 @@ namespace ReportService.Messaging
     {
         private readonly IModel _channel;
         private readonly IServiceProvider _serviceProvider;
-        //private readonly IReportDetailService _reportDetailService;
-        //private readonly IReportService _reportService;
         private readonly string _queueName = EventNames.ReportGenerated;
 
         public ReportGeneratedConsumer(IServiceProvider serviceProvider)
@@ -36,9 +34,6 @@ namespace ReportService.Messaging
         {
             var message = Encoding.UTF8.GetString(ea.Body.ToArray());
             var reportData = JsonSerializer.Deserialize<ReportGeneratedDto>(message);
-
-            // await _reportDetailService.SaveReportDetailAsync(reportData);
-            // await _reportService.UpdateReportStatusByIdAsync(reportData.ReportId, ReportStatus.ReportDone);
 
             using(var scope = _serviceProvider.CreateScope())
             {
