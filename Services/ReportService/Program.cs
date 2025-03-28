@@ -1,6 +1,9 @@
+using Common.DTOs;
+using Common.RabbitMQItem;
 using Microsoft.EntityFrameworkCore;
 using ReportService.Config;
 using ReportService.Data;
+using ReportService.Messaging;
 using ReportService.Repositories;
 using ReportService.Services;
 
@@ -22,6 +25,8 @@ builder.Services.AddScoped<IReportRepository,ReportRepository>();
 builder.Services.AddScoped<IReportService, ReportService.Services.ReportService>();
 builder.Services.AddScoped<IReportDetailRepository, ReportDetailRepository>();
 builder.Services.AddScoped<IReportDetailService, ReportDetailService>();
+builder.Services.AddHostedService<ReportGeneratedConsumer>();
+builder.Services.AddSingleton<IRabbitMqProducer<RabbitMqRequestDto>, RabbitMqProducer<RabbitMqRequestDto>>();
 
 builder.Services.AddCors(options =>
 {

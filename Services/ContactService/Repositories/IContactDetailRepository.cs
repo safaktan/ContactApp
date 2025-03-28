@@ -1,4 +1,4 @@
-using ContactService.DTOs;
+using Common.DTOs;
 using ContactService.Models;
 
 namespace ContactService.Repositories
@@ -8,6 +8,7 @@ namespace ContactService.Repositories
         Task<List<ContactDetail>> CreateContactDetailAsync(List<ContactDetail> contactDetail);
         Task<Contact> GetContactInfoAndDetailByContactIdAsync(Guid contactId);
         Task<string> DeleteAllContactDetailByContactIdAsync(Guid contactId);
+        Task<List<ReportResultDto>> GetReportDataByLocationAsync();
     }
     
 }

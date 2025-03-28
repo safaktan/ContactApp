@@ -6,6 +6,9 @@ namespace Common.Models
         public bool IsSuccess { get; set; }
         public string Message { get; set; }
 
+        public ServiceResponse(){
+            
+        }
 
         public ServiceResponse(bool isSuccess, string message, T data = default)
         {

@@ -1,4 +1,10 @@
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Common.Constants;
+using Common.DTOs;
+using Common.RabbitMQItem;
 using Microsoft.AspNetCore.Mvc;
+using ReportService.DTOs;
 using ReportService.Repositories;
 using ReportService.Services;
 
@@ -11,6 +17,7 @@ namespace ReportService.Controller
         private readonly IReportService _reportService;
         private readonly IReportDetailService _reportDetailService;
 
+
         public ReportController(IReportService reportService, IReportDetailService reportDetailService)
         {
             _reportService = reportService;
@@ -22,7 +29,7 @@ namespace ReportService.Controller
         {
             var response = await _reportService.GetAllReportsAsync();
 
-            if(!response.IsSuccess)
+            if (!response.IsSuccess)
             {
                 return BadRequest(response);
             }
@@ -35,7 +42,27 @@ namespace ReportService.Controller
         {
             var response = await _reportDetailService.GetReportDetailByReportIdAsync(reportId);
 
-            if(!response.IsSuccess)
+            if (!response.IsSuccess)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpPost("RequestReport")]
+        public async Task<IActionResult> RequestReport()
+        {
+            var createReportResponse = await _reportService.CreateReport();
+            if(!createReportResponse.IsSuccess)
+            {
+                return BadRequest(Response);
+            }
+
+            var rabbitMqRequestDto = new RabbitMqRequestDto();
+            rabbitMqRequestDto.ReportId = createReportResponse.Data.Id;
+            var response = await _reportService.ReportRequest(rabbitMqRequestDto);
+            if (!response.IsSuccess)
             {
                 return BadRequest(response);
             }

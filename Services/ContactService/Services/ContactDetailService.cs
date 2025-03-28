@@ -1,8 +1,10 @@
 using AutoMapper;
+using Common.DTOs;
 using Common.Models;
 using ContactService.DTOs;
 using ContactService.Models;
 using ContactService.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ContactService.Services
 {
@@ -75,6 +77,19 @@ namespace ContactService.Services
             catch (System.Exception ex)
             {
                 return ServiceResponse<string>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<ServiceResponse<List<ReportResultDto>>> GetReportDataByLocationAsync()
+        {
+            try
+            {
+                 var response = await _contactDetailRepository.GetReportDataByLocationAsync();
+                 return ServiceResponse<List<ReportResultDto>>.Success(response);
+            }
+            catch (System.Exception ex)
+            {
+                return ServiceResponse<List<ReportResultDto>>.Failure(ex.Message);
             }
         }
     }

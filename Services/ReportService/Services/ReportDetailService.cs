@@ -1,6 +1,8 @@
 using AutoMapper;
+using Common.DTOs;
 using Common.Models;
 using ReportService.DTOs;
+using ReportService.Models;
 using ReportService.Repositories;
 
 namespace ReportService.Services
@@ -31,6 +33,26 @@ namespace ReportService.Services
             catch (System.Exception ex)
             {
                 return ServiceResponse<ReportDetailDto>.Failure(ex.Message);
+            }
+        }
+
+        public async Task<ServiceResponse<string>> SaveReportDetailAsync(ReportGeneratedDto reportGeneratedDto)
+        {
+            try
+            {
+                var reportDetailList = _mapper.Map<List<ReportDetail>>(reportGeneratedDto);
+                var result = await _reportDetailRepository.SaveReportDetailAsync(reportDetailList);
+
+                if(!result)
+                {
+                    return ServiceResponse<string>.Failure("Report not saved");
+                }
+                return ServiceResponse<string>.Success("Success");
+                
+            }
+            catch (System.Exception ex)
+            {
+                return ServiceResponse<string>.Failure(ex.Message);
             }
         }
     }

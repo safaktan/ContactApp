@@ -16,6 +16,13 @@ namespace ReportService.Repositories
         {
             return await _context.ReportDetails.FirstOrDefaultAsync(x => x.ReportId == reportId);
         }
+
+        public async Task<bool> SaveReportDetailAsync(List<ReportDetail> reportDetailList)
+        {
+            await _context.ReportDetails.AddRangeAsync(reportDetailList);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 
 }
