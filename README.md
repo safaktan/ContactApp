@@ -14,3 +14,4 @@ RabbitMq
 Adres: http://localhost:15672/
 Kullanıcı Adı: guest
 Parola: guest
+Düzgün bir readme yazamadım beklemedik yerlerde hata aldım ama düzelttim.
